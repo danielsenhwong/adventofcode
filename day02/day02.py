@@ -10,8 +10,9 @@
 # A present with dimensions 1x1x10 requires 2*1 + 2*10 + 2*10 = 42 square feet of wrapping paper plus 1 square foot of slack, for a total of 43 square feet.
 # All numbers in the elves' list are in feet. How many total square feet of wrapping paper should they order?
 
-# Input was saved as a text file.
-# Read this in, but each new line is a new list element. Remember to trim off the trailing newling break.
+# Puzzle inpu was saved to a text file.
+# Read this in, but each new line (measurement) is a new list element.
+# Remember to trim off the trailing newline break at the end.
 with open("day02_input.txt", "r") as myfile:
 	src_data = myfile.read().rstrip('\n')
 	data_list = src_data.split('\n')
@@ -29,12 +30,14 @@ for index in range(len(data_list)):
 	# split each set of measurements
 	for package in data_list[index]:
 		meas = [int(n) for n in data_list[index].split('x')]	
+	# calculate the surface area + slack for each gift individually, and load into a new list
 	calc_area = (2 * (meas[0]*meas[1] + meas[1]*meas[2] + meas[2]*meas[0])) + (prod(meas) / max(meas))
 	data_calc.append(calc_area)
 
+# sum all calculated areas
 day02_answer = sum(data_calc)
 
-print day02_answer
+print 'Total gift wrap needed in square feet: ' + str(day02_answer)
 
 
 # Part 2
@@ -58,9 +61,10 @@ for index in range(len(data_list)):
         # split each set of measurements
         for package in data_list[index]:
                 meas = [int(n) for n in data_list[index].split('x')]
+	# Calculate ribbon length needed for each gift individually, and load into a new list
         calc_ribbon = (2 * sum(sorted(meas)[:2])) + prod(meas)
         data_calc.append(calc_ribbon)
 
 ribbon_total = sum(data_calc)
 
-print ribbon_total
+print 'Total ribbon length needed, in feet: ' + str(ribbon_total)
