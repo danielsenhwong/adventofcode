@@ -49,42 +49,72 @@ import re
 
 # Keep track of the number of nice strings
 nice_count = 0
-nice_count_2 = 0
+really_nice_count = 0
 
 # Set up a list of invalid strings
-invalid_str = ['ab', 'cd', 'pq', 'xy']
+# invalid_str = ['ab', 'cd', 'pq', 'xy']
 
 # Iterate through each item in the list
 for test_str in src:
-	# Count vowels and duplicates
-	num_vowels = 0
-	num_dup = 0
+#	# Count vowels and duplicates
+#	num_vowels = 0
+#	num_dup = 0
+#
+#	# Set up flags
+#	has_invalid = 0
+#
+#	# Iterate through each string
+# 	for i in range(len(test_str)):
+# 		# Set up previous letter tracking
+# 		if i == 0:
+# 			prev_letter = str()
+# 
+# 		# Has at least one vowel
+# 		if re.search('[aeiou]', test_str[i]):
+# 			num_vowels += 1
+# 		
+# 		# Has duplicate
+# 		if test_str[i] == prev_letter:
+# 			num_dup += 1
+# 		
+# 		# Has invalid string
+# 		if (prev_letter + test_str[i]) in invalid_str:
+# 			has_invalid = 1
+# 
+# 		# Keep track of previous letters
+# 		prev_letter = test_str[i]
+# 
+# 	if num_vowels >= 3 and num_dup >= 1 and not has_invalid:
+# 		nice_count += 1	
+# 	
+# 	
+# 	if re.search(r'[aeiou]{3,}', test_str):
+# 		num_vowel += 1
+# 	
+# 	if re.search(r'[a-z]
 
-	# Set up flags
-	has_invalid = 0
+	# Use regular expressions instead; brute force only works on part 1
+	# Part 1
+	# Notes:
+	# - re.findall is more approriate for vowel search than re.search
+	#   which doesn't work for that purpose anyway.
+	# - \1 references the preceding regular expression group, e.g. (.)\1 is 
+	#   any repeated character
+	# Used https://github.com/ratmatix/adventofcode/blob/master/solve.py
+	# as an example to understand regex, why re.search didn't work for vowel
+	# search
+	# Vowels [aeiou]
+	# Repeated single character (.)\1
+	# Specific strings (ab|cd|pq|xy)
+	if len(re.findall('[aeiou]', test_str)) > 2 and re.search(r'(.)\1', test_str) and not re.search('(ab|cd|pq|xy)', test_str):
+		nice_count += 1
 
-	# Iterate through each string
-	for i in range(len(test_str)):
-		# Set up previous letter tracking
-		if i == 0:
-			prev_letter = str()
+	# Part 2
+	# Any pair of two letters (..) that appear at least twice (..)\1 without
+	# overlapping (..).*\1
+	# At least one letter which repeats (.)\1 with exactly one letter
+	# between them (.).\1
+	if re.search(r'(..).*\1', test_str) and re.search(r'(.).\1', test_str):
+		really_nice_count += 1
 
-		# Has at least one vowel
-		if re.search('[aeiou]', test_str[i]):
-			num_vowels += 1
-		
-		# Has duplicate
-		if test_str[i] == prev_letter:
-			num_dup += 1
-		
-		# Has invalid string
-		if (prev_letter + test_str[i]) in invalid_str:
-			has_invalid = 1
-
-		# Keep track of previous letters
-		prev_letter = test_str[i]
-
-	if num_vowels >= 3 and num_dup >= 1 and not has_invalid:
-		nice_count += 1	
-	
-print nice_count
+print 'Nice string for Part 1: ' + str(nice_count) + '\nReally nice strings: ' + str(really_nice_count)
