@@ -25,19 +25,26 @@
 # 
 # --- Part Two ---
 # 
-# Realizing the error of his ways, Santa has switched to a better model of determining whether a string is naughty or nice. None of the old rules apply, as they are all clearly ridiculous.
+# Realizing the error of his ways, Santa has switched to a better model of
+# determining whether a string is naughty or nice. None of the old rules apply,
+# as they are all clearly ridiculous.
 # 
 # Now, a nice string is one with all of the following properties:
 # 
-# It contains a pair of any two letters that appears at least twice in the string without overlapping, like xyxy (xy) or aabcdefgaa (aa), but not like aaa (aa, but it overlaps).
-# It contains at least one letter which repeats with exactly one letter between them, like xyx, abcdefeghi (efe), or even aaa.
+# It contains a pair of any two letters that appears at least twice in the
+# string without overlapping, like xyxy (xy) or aabcdefgaa (aa), but not like
+# aaa (aa, but it overlaps).  It contains at least one letter which repeats with
+# exactly one letter between  them, like xyx, abcdefeghi (efe), or even aaa.
 # For example:
 # 
-# qjhvhtzxzqqjkmpb is nice because is has a pair that appears twice (qj) and a letter that repeats with exactly one letter between them (zxz).
-# xxyxx is nice because it has a pair that appears twice and a letter that repeats with one between, even though the letters used by each rule overlap.
-# uurcxstgmygtbstg is naughty because it has a pair (tg) but no repeat with a single letter between them.
-# ieodomkazucvgmuy is naughty because it has a repeating letter with one between (odo), but no pair that appears twice.
-# How many strings are nice under these new rules?
+# qjhvhtzxzqqjkmpb is nice because is has a pair that appears twice (qj) and a
+# letter that repeats with exactly one letter between them (zxz).  xxyxx is nice
+# because it has a pair that appears twice and a letter that repeats with one
+# between, even though the letters used by each rule overlap.  uurcxstgmygtbstg
+# is naughty because it has a pair (tg) but no repeat with a single letter
+# between them.  ieodomkazucvgmuy is naughty because it has a repeating letter
+# with one between (odo), but no pair that appears twice.  How many strings are
+# nice under these new rules?
 
 # Puzzle input saved to text file. Read this, strip the last newline break, and
 # make a list with each line as a new list item
@@ -117,4 +124,5 @@ for test_str in src:
 	if re.search(r'(..).*\1', test_str) and re.search(r'(.).\1', test_str):
 		really_nice_count += 1
 
-print 'Nice string for Part 1: ' + str(nice_count) + '\nReally nice strings: ' + str(really_nice_count)
+print 'Nice string for Part 1: ' + str(nice_count) + '\nReally nice strings: ' +
+str(really_nice_count)
