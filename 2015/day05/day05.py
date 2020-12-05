@@ -124,5 +124,5 @@ for test_str in src:
 	if re.search(r'(..).*\1', test_str) and re.search(r'(.).\1', test_str):
 		really_nice_count += 1
 
-print 'Nice string for Part 1: ' + str(nice_count) + '\nReally nice strings: ' +
-str(really_nice_count)
+print('Nice string for Part 1: ' + str(nice_count) + '\nReally nice strings: ' +
+str(really_nice_count))
