@@ -47,8 +47,15 @@ len(next_src) """
 # Solution from elsewhere
 from itertools import groupby
 
+# make a function
 def look_and_say(input_string, num_iterations):
+    # iterate
     for i in range(num_iterations):
+        # i've never used groupby, so this is interesting
+        # feed the input string into the groupby function
+        # which returns keys and groups where keys are the item being grouped
+        # and the groups are a list of all the times they appear consecutively
+        # define the input string recursively in the loop
         input_string = ''.join([str(len(list(g))) + str(k) for k, g in groupby(input_string)])
     return input_string
 
