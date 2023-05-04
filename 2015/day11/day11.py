@@ -22,3 +22,26 @@ Given Santa's current password (your puzzle input), what should his next passwor
 Your puzzle input is hepxcrrq. """
 
 src = 'hepxcrrq'
+
+# 
+# new password restrictions
+# * one increasing straight of at least three consecutive letters
+# * no i, o, or l
+# * must contain at least two different non-overlapping pairs of letters 
+
+# initialize
+curr_pass = ord(map(lambda x: ord(x), list(str(src))))
+
+
+# increment the rightmost letter
+incr = ord(curr_pass[-1]) + 1
+
+if incr > 122:
+    # wrap back to a if over
+    incr = 97
+
+elif incr == 105 or incr == 108 or incr = 111:
+    incr+=1
+temp_pass = curr_pass[:-1]
+temp_pass += chr(ord(curr_pass[-1])+1)
+next_pass = temp_pass
